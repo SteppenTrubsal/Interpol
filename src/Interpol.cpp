@@ -5,7 +5,7 @@ using namespace std;
 int main() {
 	double a = -10;
 	double b = 10;
-	double n = 3;
+	double n = 5;
 	int precision = 10;
 
 

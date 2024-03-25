@@ -2,6 +2,7 @@
 using namespace std;
 
 vector<double> calcX(double a, double b, double n) {
+	n -= 1;
 	double it = (b - a) / n;
 	vector<double> vecX;
 	for (int i = 0; i < n;i++) {
@@ -12,16 +13,17 @@ vector<double> calcX(double a, double b, double n) {
 }
 
 vector<double> getBasisUpper(vector<double> n) {
-	vector<double> upper;
-	upper.push_back(1);
-	for (int i = 0; i < n.size(); i++) {
-		upper.push_back(coef(n, i)*con(i+1));
+	vector<double> upper(n.size() + 1);
+	for (int i = 0; i < upper.size(); i++) {
+		upper[i] = (coef(n, i)*con(i));
 	}
 	return upper;
 }
 double getbasisLower(vector<double> n, double xi) {
 	double p = 1;
-	for (int i = 0; i < n.size(); i++) { p *= (xi - n[i]); }
+	for (int i = 0; i < n.size(); i++) { 
+		p *= (xi - n[i]); 
+	}
 	return p;
 }
 vector<double> getIPol(vector<double> n, int idx) {
@@ -36,7 +38,7 @@ vector<double> getIPol(vector<double> n, int idx) {
 }
 vector<double> getLagrange(double a, double b, double n, string func) {
 	vector<double> X = calcX(a, b, n);
-	vector<double> res(X.size()-1, 0);
+	vector<double> res(X.size(), 0);
 
 	for (int i = 0; i < X.size(); i++) {
 		vector<double> pol = getIPol(X, i);
