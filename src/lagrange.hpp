@@ -2,10 +2,10 @@
 using namespace std;
 
 vector<double> calcX(double a, double b, double n) {
-	n -= 1;
 	double it = (b - a) / n;
 	vector<double> vecX;
-	for (int i = 0; i < n;i++) {
+	if(n==1){it=0;}
+	for (int i = 0; i < n;++i) {
 		vecX.push_back(a + it * i);
 	}
 	vecX.push_back(b);

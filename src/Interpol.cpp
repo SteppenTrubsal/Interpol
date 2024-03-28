@@ -3,10 +3,10 @@
 using namespace std;
 
 int main() {
-	double a = -10;
-	double b = 10;
-	double n = 5;
-	int precision = 10;
+	double a = -5;
+	double b = 5;
+	double n = 10;
+	int precision = 20;
 
 
 	cout << "Enter an equation: ";
