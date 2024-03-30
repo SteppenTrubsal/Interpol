@@ -1,17 +1,6 @@
 #include "someFunc.hpp"
 using namespace std;
 
-vector<double> calcX(double a, double b, double n) {
-	double it = (b - a) / n;
-	vector<double> vecX;
-	if(n==1){it=0;}
-	for (int i = 0; i < n;++i) {
-		vecX.push_back(a + it * i);
-	}
-	vecX.push_back(b);
-	return vecX;
-}
-
 vector<double> getBasisUpper(vector<double> n) {
 	vector<double> upper(n.size() + 1);
 	for (int i = 0; i < upper.size(); i++) {
@@ -51,11 +40,7 @@ vector<double> getLagrange(double a, double b, double n, string func) {
 	return res;
 }
 
-struct graphic {
-	vector<double> x;
-	vector<double> y;
-};
-graphic calcGraphic(double a, double b, double n, string func, int precision) {
+graphic calcLagGraphic(double a, double b, double n, string func, int precision) {
 	graphic res;
 	double dx = (b - a) / precision;
 	vector<double> multipliers = getLagrange(a, b, n, func);

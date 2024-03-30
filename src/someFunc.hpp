@@ -1,4 +1,3 @@
-#include <vector>
 #include <muParser.h>
 using namespace std;
 
@@ -26,9 +25,25 @@ int con(int t) {
 	else { return 1; }
 }
 
+vector<double> calcX(double a, double b, double n) {
+	double it = (b - a) / n;
+	vector<double> vecX;
+	if (n == 1) { it = 0; }
+	for (int i = 0; i < n;++i) {
+		vecX.push_back(a + it * i);
+	}
+	vecX.push_back(b);
+	return vecX;
+}
+
 double fun(string& fun, double x) {
 	mu::Parser parser;
 	parser.SetExpr(fun);
 	parser.DefineVar("x", &x);
 	return parser.Eval();
 }
+
+struct graphic {
+	vector<double> x;
+	vector<double> y;
+};
