@@ -47,3 +47,21 @@ struct graphic {
 	vector<double> x;
 	vector<double> y;
 };
+
+graphic getGraph(double a, double b, double n, string func, double precision) {
+	graphic res;
+	double dx = (b - a) / precision;
+	for (; a < b; a += dx) {
+		res.x.push_back(a);
+		res.y.push_back(fun(func, a));
+	}
+	return res;
+}
+
+double getDiff(graphic a, graphic b) {
+	double diff = 0;
+	for (int i = 0; i < a.x.size(); i++) {
+		diff = (diff > abs(a.y[i] - b.y[i])) ? diff : abs(a.y[i] - b.y[i]);
+	}
+	return diff;
+}

@@ -11,8 +11,8 @@ struct piece{
 vector<piece> createPiecewise(double a, double b, double n) {
 	vector<piece> res;
 	vector<double> X = calcX(a, b, n);
+	piece onePiece;
 	for (int i = 0; i < X.size()-1; i++) {
-		piece onePiece;
 		onePiece.xa = X[i];
 		onePiece.xb = X[i + 1];
 		res.push_back(onePiece);
