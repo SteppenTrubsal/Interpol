@@ -4,7 +4,7 @@ using namespace std;
 
 vector<double> reverse(vector<double> n) {
 	vector<double> rev;
-	for (int i = 0; i < n.size(); i++) { rev.push_back(n[i]); }
+	for (int i = n.size() - 1; i >= 0; i--) { rev.push_back(n[i]); }
 	return rev;
 }
 vector<double> getSpline(vector<double> n, int st, int fn) {
@@ -12,7 +12,7 @@ vector<double> getSpline(vector<double> n, int st, int fn) {
 }
 double coef(vector<double> n, int h) {
 	if (h == 0) { return 1; }
-	int sum = 0;
+	double sum = 0;
 	vector<double> spline = getSpline(n, h - 1, 0);
 	spline = reverse(spline);
 	for (int i = 0; i < spline.size(); i++) {
