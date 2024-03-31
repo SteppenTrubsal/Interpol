@@ -1,3 +1,4 @@
+#pragma once
 #include <muParser.h>
 using namespace std;
 
@@ -46,6 +47,23 @@ double fun(string& fun, double x) {
 struct graphic {
 	vector<double> x;
 	vector<double> y;
+
+
+	graphic() {}
+
+	graphic(const graphic& other) {
+		x = other.x;
+		y = other.y;
+	}
+
+
+	graphic& operator=(const graphic& other) {
+		if (this != &other) { 
+			x = other.x;
+			y = other.y;
+		}
+		return *this;
+	}
 };
 
 graphic getGraph(double a, double b, double n, string func, double precision) {

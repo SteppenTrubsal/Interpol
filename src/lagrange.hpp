@@ -40,7 +40,7 @@ vector<double> getLagrange(double a, double b, double n, string func) {
 	return res;
 }
 
-graphic& calcLagGraphic(double a, double b, double n, string func, int precision) {
+ graphic calcLagGraphic(double a, double b, double n, string func, int precision) {
 	graphic res;
 	double dx = (b - a) / precision;
 	vector<double> multipliers = getLagrange(a, b, n, func);

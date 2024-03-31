@@ -1,3 +1,4 @@
+#pragma once
 #include "someFunc.hpp"
 using namespace std;
 
