@@ -1,3 +1,4 @@
+#pragma once
 #include <muParser.h>
 using namespace std;
 
