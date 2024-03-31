@@ -34,7 +34,7 @@ private:
 	sf::RenderWindow window;
 	bool isStarted = false;
 	bool isTheResultReady = false;
-	graphic lg, pw;
+	graphic lg, pw, gr;
 };
 Window::Window() :
 	window(sf::VideoMode(1024, 728), L"LAB 4")
@@ -165,7 +165,7 @@ void Window::renderGUI()
 			
 			pw = calcPieceGraphic(dLim1, dLim2, n, funk, precision);
 
-
+			gr = getGraph(dLim1, dLim2, n, funk, precision);
 
 			/*for (int i = 0; i < pw.x.size(); i++) {
 				cout << pw.x[i] << " " << pw.y[i] << endl;
@@ -193,6 +193,8 @@ void Window::renderGUI()
 				ImPlot::PlotLine("##plot", lg.x.data(), lg.y.data(), lg.y.size());
 				ImPlot::SetNextLineStyle(ImVec4(0.0f, 0.0f, 1.0f, 1.0f));
 				ImPlot::PlotLine("##plot", pw.x.data(), pw.y.data(), pw.y.size());
+				ImPlot::SetNextLineStyle(ImVec4(0.0f, 1.0f, 0.0f, 1.0f));
+				ImPlot::PlotLine("##plot", gr.x.data(), gr.y.data(), gr.y.size());
 				ImPlot::EndPlot();
 			}
 			
