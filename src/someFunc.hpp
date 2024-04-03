@@ -2,7 +2,7 @@
 #include <muParser.h>
 using namespace std;
 
-vector<double> reverse(vector<double> n) {
+vector<double> reverse(vector<double>& n) {
 	vector<double> rev;
 	for (int i = n.size() - 1; i >= 0; i--) { rev.push_back(n[i]); }
 	return rev;
@@ -69,9 +69,11 @@ struct graphic {
 graphic getGraph(double a, double b, double n, string func, double precision) {
 	graphic res;
 	double dx = (b - a) / precision;
-	for (; a < b; a += dx) {
-		res.x.push_back(a);
-		res.y.push_back(fun(func, a));
+	for (double x = a; x <= b; x += dx) {
+		double y = fun(func, x);
+
+		res.x.push_back(x);
+		res.y.push_back(y);
 	}
 	return res;
 }

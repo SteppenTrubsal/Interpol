@@ -34,21 +34,24 @@ void calcB(vector<piece>& n, string func) {
 }
 
 graphic calcPieceGraphic(double a, double b, double n, string func, int precision) {
+	graphic res;
+	double dx = (b - a) / precision;
 	vector<piece> piecewiseLinear = createPiecewise(a, b, n);
 	calcA(piecewiseLinear, func);
 	calcB(piecewiseLinear, func);
-
-	graphic res;
-	double dx = (b - a) / precision;
-	for (int i = 0; i < piecewiseLinear.size(); i++) {
+	for (double x = a; x <= b; x += dx) {
 		double y = 0;
-		double x = piecewiseLinear[i].xa;
-		for (; x < piecewiseLinear[i].xb;x += dx) {
-			y = piecewiseLinear[i].a * x + piecewiseLinear[i].b;
-
-			res.x.push_back(x);
-			res.y.push_back(y);
+		for (int i = 0; i < piecewiseLinear.size();i++) {
+			if (x >= piecewiseLinear[i].xa && x < piecewiseLinear[i].xb) {
+				y = piecewiseLinear[i].a * x + piecewiseLinear[i].b;
+			}
 		}
+		if (x == b) {
+			y = piecewiseLinear.back().a * x + piecewiseLinear.back().b;
+		}
+
+		res.x.push_back(x);
+		res.y.push_back(y);
 	}
 	return res;
 }

@@ -141,13 +141,19 @@ void Window::renderGUI()
 
 
 	ImGui::PushItemWidth(sliderWidth);
-	ImGui::SliderInt("precision", &precision, 0, 100);
+	ImGui::SliderInt(uTC(u8"Точность"), &precision, 0, 300);
 
 	ImGui::SameLine();
 
-
 	ImGui::PushItemWidth(sliderWidth);
-	ImGui::SliderInt("n", &n, 0, 50);
+	ImGui::SliderInt(uTC(u8"Узлы"), &n, 1, 100);
+
+	static bool lagrangeFlag = true;
+	static bool picewiseFlag = true;
+
+	ImGui::Checkbox(uTC(u8"Метод Лагранжа"), &lagrangeFlag );
+	ImGui::SameLine();
+	ImGui::Checkbox(uTC(u8"Метод кусочно-линейной функции"), &picewiseFlag);
 
 	ImGui::PopItemWidth();
 	if (ImGui::Button(uTC(u8"Рассчитать")))
@@ -161,10 +167,12 @@ void Window::renderGUI()
 			parser.SetExpr(lim2);
 			dLim2 = parser.Eval();
 
-			lg = calcLagGraphic(dLim1, dLim2, n, funk, precision);
-			
-			pw = calcPieceGraphic(dLim1, dLim2, n, funk, precision);
-
+			if (lagrangeFlag) {
+				lg = calcLagGraphic(dLim1, dLim2, n, funk, precision);
+			}
+			if (picewiseFlag) {
+				pw = calcPieceGraphic(dLim1, dLim2, n, funk, precision);
+			}
 			gr = getGraph(dLim1, dLim2, n, funk, precision);
 
 			/*for (int i = 0; i < pw.x.size(); i++) {
@@ -189,10 +197,14 @@ void Window::renderGUI()
 
 			if (ImPlot::BeginPlot("##plot")) {
 				ImPlot::SetupAxes(uTC(u8"X"), uTC(u8"Y"));
-				ImPlot::SetNextLineStyle(ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
-				ImPlot::PlotLine("##plot", lg.x.data(), lg.y.data(), lg.y.size());
-				ImPlot::SetNextLineStyle(ImVec4(0.0f, 0.0f, 1.0f, 1.0f));
-				ImPlot::PlotLine("##plot", pw.x.data(), pw.y.data(), pw.y.size());
+				if (lagrangeFlag) {
+					ImPlot::SetNextLineStyle(ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+					ImPlot::PlotLine("##plot", lg.x.data(), lg.y.data(), lg.y.size());
+				}
+				if (picewiseFlag) {
+					ImPlot::SetNextLineStyle(ImVec4(0.0f, 0.0f, 1.0f, 1.0f));
+					ImPlot::PlotLine("##plot", pw.x.data(), pw.y.data(), pw.y.size());
+				}
 				ImPlot::SetNextLineStyle(ImVec4(0.0f, 1.0f, 0.0f, 1.0f));
 				ImPlot::PlotLine("##plot", gr.x.data(), gr.y.data(), gr.y.size());
 				ImPlot::EndPlot();

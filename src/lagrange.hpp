@@ -1,14 +1,14 @@
 #include "someFunc.hpp"
 using namespace std;
 
-vector<double> getBasisUpper(vector<double> n) {
+vector<double> getBasisUpper(vector<double>& n) {
 	vector<double> upper(n.size() + 1);
 	for (int i = 0; i < upper.size(); i++) {
 		upper[i] = (coef(n, i)*con(i));
 	}
 	return upper;
 }
-double getbasisLower(vector<double> n, double xi) {
+double getbasisLower(vector<double>& n, double xi) {
 	double p = 1;
 	for (int i = 0; i < n.size(); i++) { 
 		p *= (xi - n[i]); 
@@ -32,9 +32,9 @@ vector<double> getLagrange(double a, double b, double n, string func) {
 	for (int i = 0; i < X.size(); i++) {
 		vector<double> pol = getIPol(X, i);
 		double yi = fun(func, X[i]);
-		for (int i = 0; i < pol.size(); i++) {
-			pol[i] *= yi;
-			res[i] += pol[i];
+		for (int j = 0; j < pol.size(); j++) {
+			pol[j] *= yi;
+			res[j] += pol[j];
 		}
 	}
 	return res;
