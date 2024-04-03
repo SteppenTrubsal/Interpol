@@ -209,9 +209,15 @@ void Window::renderGUI()
 				ImPlot::PlotLine("##plot", gr.x.data(), gr.y.data(), gr.y.size());
 				ImPlot::EndPlot();
 			}
-			
 
-
+		}
+		if (lagrangeFlag) {
+			string diffResLg = uTC(u8"Оценка погрешности метода Лагранжа: ") + to_string(getDiff(lg, gr));
+			ImGui::LabelText("##label", data(diffResLg));
+		}
+		if (picewiseFlag) {
+			string diffResPw = uTC(u8"Оценка погрешности метода кусочно-линейных функций: ") + to_string(getDiff(pw, gr));
+			ImGui::LabelText("##label", data(diffResPw));
 		}
 		ImGui::EndChild();
 	}
